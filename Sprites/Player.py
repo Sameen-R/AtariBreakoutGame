@@ -22,5 +22,3 @@ class Player(pygame.sprite.Sprite):
 
     def draw(self):
         pygame.draw.rect(self.screen, self.color, self.rect)
-
-#############
