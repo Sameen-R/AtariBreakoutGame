@@ -73,15 +73,20 @@ def game_over_screen():
         clock.tick(100)
 
 def game():
+    #creating objects
     player = Player(screen, 1200, 800)
     ball = Ball(screen, 1200,800)
     bricks = []
+
+    #inserting bricks
     for x in range(0, 11):
         for y in range(0, 8):
             bricks.append(Brick(screen, 100*x, 50*y, (255,0,0)))
 
 
     while True:
+
+        #checking if the user wants to quit
         for event in pygame.event.get():
             if event.type==pygame.QUIT:
                 pygame.quit()
@@ -93,16 +98,19 @@ def game():
             player.x+=player.speed
         if pressed[pygame.K_LEFT] and player.x>0:
             player.x-=player.speed
-        player.update(player.x, player.y)
+        player.update(player.x, player.y) #updates the player's rectangle position
 
-        if ball.x<=0 or ball.x>=screen_w-ball.w: #changed here
+        #ball's collision with the edges of the screen
+        if ball.x<=0 or ball.x>=screen_w-ball.w:
             ball.xspeed*=-1
             ball.x+=ball.xspeed
         if ball.y<=0:
             ball.yspeed*=-1
         if ball.y+ball.h>=screen_h:
+            player.score = 0
             game_over_screen()
 
+        #ball's collision with the player (deflecting left or right)
         if pygame.sprite.collide_rect(ball, player):
             collision_rect = ball.rect.clip(player.rect)
             if collision_rect.width > collision_rect.height:
@@ -121,7 +129,7 @@ def game():
             if clicked[0]==1:
                 opening_screen()
 
-
+        #ball's collisions with the bricks
         for brick in bricks.copy():
             if pygame.sprite.collide_rect(ball, brick):
                 collision_rect = ball.rect.clip(brick.rect)
@@ -130,13 +138,34 @@ def game():
                 else:
                     ball.xspeed*=-1
                 bricks.remove(brick)
+                player.score += 10
+                if player.score>player.high_score:
+                    player.high_score = player.score
+                    player.update_high_score()
 
+        #drawing all te sprites and updating the game
         screen.fill((0,0,0))
         ball.draw()
         for brick in bricks:
             brick.draw()
         player.draw()
         homeButton.draw()
+
+        #drawing the high score text
+        high_score_txt = pygame.font.SysFont(None, 25)
+        high_score_img = high_score_txt.render("High Score: " + str(player.high_score), True, (255, 255, 255))
+        high_score_rect = high_score_img.get_rect()
+        high_score_rect.x = 10
+        high_score_rect.y = 10
+        screen.blit(high_score_img, high_score_rect)
+
+        #drawing the current score text
+        score_txt = pygame.font.SysFont(None, 25)
+        score_img = score_txt.render("Score: "+str(player.score), True, (255,255,255))
+        score_rect = score_img.get_rect()
+        score_rect.x = 10
+        score_rect.y = 30
+        screen.blit(score_img, score_rect)
 
         pygame.display.update()
         clock.tick(100)
