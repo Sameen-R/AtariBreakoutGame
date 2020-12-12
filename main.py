@@ -13,11 +13,15 @@ screen = pygame.display.set_mode((screen_w, screen_h))
 clock = pygame.time.Clock()
 
 homeButton = Button(screen, 1100, 0, 100, 50, "Home", 25, (100,100,100), (0,0,0))
+player = Player(screen, 1200, 800)
+
 
 def opening_screen():
+    global player
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                player.reset_high_score()
                 pygame.quit()
                 quit()
 
@@ -44,9 +48,11 @@ def opening_screen():
         clock.tick(100)
 
 def game_over_screen():
+    global player
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                player.reset_high_score()
                 pygame.quit()
                 quit()
 
@@ -74,6 +80,7 @@ def game_over_screen():
 
 def game():
     #creating objects
+    global player
     player = Player(screen, 1200, 800)
     ball = Ball(screen, 1200,800)
     bricks = []
@@ -89,6 +96,7 @@ def game():
         #checking if the user wants to quit
         for event in pygame.event.get():
             if event.type==pygame.QUIT:
+                player.reset_high_score()
                 pygame.quit()
                 quit()
 

@@ -56,5 +56,11 @@ class Player(pygame.sprite.Sprite):
                 High_Score_file.write(str(self.high_score))
 
 
+    def reset_high_score(self):
+        with open('Sprites/High_Score.txt', 'r+') as High_Score_file:
+            High_Score_file.seek(0)
+            High_Score_file.truncate()
+            High_Score_file.write('0')
+
     def draw(self):
         pygame.draw.rect(self.screen, self.color, self.rect)
