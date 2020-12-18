@@ -22,4 +22,4 @@ class Ball(pygame.sprite.Sprite):
         self.rect.y = self.y
 
     def draw(self):
-        pygame.draw.circle(self.screen, self.color, (self.x+25, self.y+25), 25)
+        pygame.draw.circle(self.screen, self.color, (int(self.x+25), int(self.y+25)), 25)
