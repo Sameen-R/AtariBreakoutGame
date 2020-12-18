@@ -6,14 +6,14 @@ from Sprites.Brick import Brick
 
 pygame.init()
 
-screen_w = 1200
-screen_h = 800
+screen_w = 800
+screen_h = 600
 screen = pygame.display.set_mode((screen_w, screen_h))
 
 clock = pygame.time.Clock()
 
-homeButton = Button(screen, 1100, 0, 100, 50, "Home", 25, (100,100,100), (0,0,0))
-player = Player(screen, 1200, 800)
+homeButton = Button(screen, 700, 0, 100, 50, "Home", 25, (100,100,100), (0,0,0))
+player = Player(screen, screen_w, screen_h)
 
 
 def opening_screen():
@@ -27,12 +27,12 @@ def opening_screen():
 
         screen.fill((0,0,0))
 
-        txt_font = pygame.font.SysFont(None, 150)
+        txt_font = pygame.font.SysFont(None, 100)
         txt_img = txt_font.render("Atari Breakout", True, (255,255,255))
         txt_rect = txt_img.get_rect()
         txt_rect.center = (screen_w/2, screen_h/4)
 
-        small_font = pygame.font.SysFont(None, 50)
+        small_font = pygame.font.SysFont(None, 35)
         small_img = small_font.render("Press the space button to play", True, (255, 255, 0))
         small_rect = small_img.get_rect()
         small_rect.center = (screen_w / 2, screen_h / 2)
@@ -58,12 +58,12 @@ def game_over_screen():
 
         screen.fill((0,0,0))
 
-        txt_font = pygame.font.SysFont(None, 200)
+        txt_font = pygame.font.SysFont(None, 150)
         txt_img = txt_font.render("GAME OVER", True, (255,0,0))
         txt_rect = txt_img.get_rect()
         txt_rect.center = (screen_w/2, screen_h/4)
 
-        small_font = pygame.font.SysFont(None, 50)
+        small_font = pygame.font.SysFont(None, 35)
         small_img = small_font.render("Press the space button to play again", True, (0, 255, 0))
         small_rect = small_img.get_rect()
         small_rect.center = (screen_w / 2, screen_h / 2)
@@ -81,13 +81,13 @@ def game_over_screen():
 def game():
     #creating objects
     global player
-    player = Player(screen, 1200, 800)
-    ball = Ball(screen, 1200,800)
+    player = Player(screen, screen_w, screen_h)
+    ball = Ball(screen, screen_w, screen_h)
     bricks = []
 
     #inserting bricks
-    for x in range(0, 11):
-        for y in range(0, 8):
+    for x in range(0, 7):
+        for y in range(0, 6):
             bricks.append(Brick(screen, 100*x, 50*y, (255,0,0)))
 
 
