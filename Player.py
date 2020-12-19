@@ -34,7 +34,7 @@ class Player(pygame.sprite.Sprite):
             -The text_file.readlines() function gets all the lines of the text file in a list. Only the first line of the file contains the score.
             -The string.strip('\n') removes all occurences of the new line character from the string.
         '''
-        with open('Sprites/High_Score.txt', 'r') as High_Score_file:
+        with open('High_Score.txt', 'r') as High_Score_file:
             high_score = int(High_Score_file.readlines()[0].strip('\n'))
         return high_score
 
@@ -43,7 +43,7 @@ class Player(pygame.sprite.Sprite):
         The High_Score.txt file is opened in r+ mode (reading and writing enabled).
         If the self.high_score variable is larger than the high score recorded in the file, the new high score will be replace the old one.
         '''
-        with open('Sprites/High_Score.txt', 'r+') as High_Score_file:
+        with open('High_Score.txt', 'r+') as High_Score_file:
             recorded_high_score = int(High_Score_file.readlines()[0].strip('\n'))
             if self.high_score > recorded_high_score:
                 '''
@@ -57,7 +57,7 @@ class Player(pygame.sprite.Sprite):
 
 
     def reset_high_score(self):
-        with open('Sprites/High_Score.txt', 'r+') as High_Score_file:
+        with open('High_Score.txt', 'r+') as High_Score_file:
             High_Score_file.seek(0)
             High_Score_file.truncate()
             High_Score_file.write('0')

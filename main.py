@@ -1,8 +1,8 @@
 import pygame
 from Button import Button
-from Sprites.Player import Player
-from Sprites.Ball import Ball
-from Sprites.Brick import Brick
+from Player import Player
+from Ball import Ball
+from Brick import Brick
 
 pygame.init()
 
