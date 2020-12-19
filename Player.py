@@ -7,7 +7,7 @@ class Player(pygame.sprite.Sprite):
         self.screen_h = screen_h
 
         self.w = 300
-        self.h = 20
+        self.h = 40
         self.x = (screen_w - self.w) / 2
         self.y = screen_h - self.h
         self.color = (255, 255, 255)
