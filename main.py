@@ -17,7 +17,6 @@ player = Player(screen, screen_w, screen_h)
 
 
 def opening_screen():
-    global player
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -48,7 +47,6 @@ def opening_screen():
         clock.tick(100)
 
 def game_over_screen():
-    global player
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -92,7 +90,6 @@ def game():
 
 
     while True:
-
         #checking if the user wants to quit
         for event in pygame.event.get():
             if event.type==pygame.QUIT:
